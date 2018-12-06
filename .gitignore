@@ -4,6 +4,7 @@
 
 .secret/
 *.swp
+*.DS_Store
 
 ### Django ###
 *.log
