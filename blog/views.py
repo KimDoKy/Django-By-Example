@@ -7,7 +7,7 @@ from django.db.models import Count
 from taggit.models import Tag
 
 from .models import Post, Comment
-from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm, CommentForm, SearchForm
 
 
 class PostListView(ListView):
@@ -18,6 +18,7 @@ class PostListView(ListView):
 
 def post_list(request, tag_slug=None):
     object_list = Post.published.all()
+    q = request.GET.get('q')
     tag = None
 
     if tag_slug:
@@ -76,3 +77,20 @@ def post_share(request, post_id):
          form = EmailPostForm()
     return render(request, 'blog/post/share.html', {'post':post, 'form':form, 'sent':sent})
 
+def post_search(request):
+    form = SearchForm()
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            cd = form.cleaned_data['query']
+            results = Post.published.filter(title__icontains=cd)
+            total_results = results.count()
+    else:
+        cd = None
+        results = None
+        total_results = 0
+    return render(request, 'blog/post/search.html',{
+                 'form':form,
+                 'cd':cd,
+                 'results':results,
+                 'total_results':total_results})

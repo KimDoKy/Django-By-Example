@@ -11,4 +11,5 @@ urlpatterns = [
     path('<year>/<month>/<day>/<post>/', views.post_detail, name='post_detail'),
     path('<post_id>/share/', views.post_share, name='post_share'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
+    path('search/', views.post_search, name='post_search'),
     ]
