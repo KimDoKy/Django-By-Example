@@ -2,6 +2,13 @@
 # Created by https://www.gitignore.io/api/django,python
 # Edit at https://www.gitignore.io/?templates=django,python
 
+<<<<<<< HEAD
+=======
+.secret/
+*.swp
+*.DS_Store
+
+>>>>>>> demo
 ### Django ###
 *.log
 *.pot
