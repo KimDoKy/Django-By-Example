@@ -41,12 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'account.apps.AccountConfig',
-
 ]
 
 SITE_ID = 1
@@ -94,7 +93,7 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
+    'accounts.authentication.EmailAuthBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
