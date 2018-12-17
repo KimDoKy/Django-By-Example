@@ -3,6 +3,14 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+{% load socialaccount %}
+
+  <div class="social">
+    <ul>
+      <li class="facebook"><a href="{% provider_login_url 'facebook' %}">Sign in with Facebook</a></li>
+    </ul>
+  </div>
+
   <h1>Login</h1>
   <p>Please, use the following form to login:
   if you don't have an account <a href="{% url 'register' %}">register here.</a></p>

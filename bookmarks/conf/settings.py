@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 ]
 
-SITE_ID = 1
+SITE_ID = 3
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -96,6 +96,34 @@ AUTHENTICATION_BACKENDS = (
     'accounts.authentication.EmailAuthBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook':{
+        'METHOD':'oauth2',
+        'SCOPE': ['email','public_profile','user_friends'],
+        'AUTH_PARAMS': {'auth_type':'reauthenticate'},
+        'FIELDS':[
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.12'}}
+
+SOCIAL_AUTH_FACEBOOK_KEY = CONF_FILES['facebook']['key']
+SOCIAL_AUTH_FACEBOOK_SECRET = CONF_FILES['facebook']['secret']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
