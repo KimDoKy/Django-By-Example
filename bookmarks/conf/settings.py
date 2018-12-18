@@ -46,9 +46,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
 ]
 
-SITE_ID = 3
+SITE_ID = 4
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,6 +125,8 @@ SOCIAL_AUTH_FACEBOOK_KEY = CONF_FILES['facebook']['key']
 SOCIAL_AUTH_FACEBOOK_SECRET = CONF_FILES['facebook']['secret']
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = CONF_FILES['google']['key']
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = CONF_FILES['google']['secret']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
