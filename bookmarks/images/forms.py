@@ -24,7 +24,7 @@ class ImageCreateForm(forms.ModelForm):
 
     def save(self, force_insert=False,
                    force_update=False,
-                   comit=True):
+                   commit=True):
         image = super(ImageCreateForm, self).save(commit=False)
         image_url = self.cleaned_data['url']
         image_name = '{}.{}'.format(slugify(image.title),
