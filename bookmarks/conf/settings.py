@@ -41,15 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'account.apps.AccountConfig',
-
+    'allauth.socialaccount.providers.google',
+    'images',
 ]
 
-SITE_ID = 1
+SITE_ID = 4
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -94,9 +95,39 @@ DATABASES = {
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
+    'accounts.authentication.EmailAuthBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook':{
+        'METHOD':'oauth2',
+        'SCOPE': ['email','public_profile','user_friends'],
+        'AUTH_PARAMS': {'auth_type':'reauthenticate'},
+        'FIELDS':[
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.12'}}
+
+SOCIAL_AUTH_FACEBOOK_KEY = CONF_FILES['facebook']['key']
+SOCIAL_AUTH_FACEBOOK_SECRET = CONF_FILES['facebook']['secret']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = CONF_FILES['google']['key']
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = CONF_FILES['google']['secret']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
